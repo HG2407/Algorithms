@@ -1,6 +1,6 @@
 window.addEventListener('load', onLoad);
 
-let array = [1, 10, 9, 8, 3, 2, 4, 6, 5, 7];
+let array = [1, 21, 78, 890];
 function onLoad(){
    console.log(sorter(array));
 }
