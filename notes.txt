@@ -1,0 +1,44 @@
+known-
+declaring an array - daysInMonth
+let daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
+given-
+date 1, date 2
+let date1 = [30, 6, 2023] 
+let date2 = [15, 12, 2023]
+let firstDate, secondDate;
+
+if(date1[1]< date2[1]) {
+    firstDate = date1;
+    secondDate = date2;
+} else {
+     firstDate = date2;
+     secondDate = date1;1
+}
+
+let person = new person();
+
+
+let totalDays = 0;
+
+let startMonth = date1[1] + 1;
+     for(let i=startMonth; i<=date2[1]; i++){
+        totalDays += daysInMonth[i];
+     }
+
+     let dayInDate1 = date1[0];
+     let totalDaysInDate1Month = daysInMonth[(date1[1]-1)];
+     let remainingDaysInDate1Month = totalDaysInDate1Month - dayInDate1;
+     totalDays += remainingDaysInDate1Month + date2[0];
+how?
+how to debug a particular block of code
+instantiating
+
+
+
+date 1 = [x, y, z];
+date 2 = [a, b, c];
+daysInMonths = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
+for every 4 years, add 1 to string[1]
+if(date1[2]/4 = int)

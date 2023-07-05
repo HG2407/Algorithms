@@ -1,0 +1,14 @@
+/* img {
+    position: absolute;
+    top: 0;
+    left: 0;
+} */
+
+/* h1, button {
+    position: absolute;
+    top: 0;
+    left: 0;
+} */
+body {
+    overflow: hidden;
+  }
