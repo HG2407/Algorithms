@@ -42,3 +42,4 @@ daysInMonths = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
 for every 4 years, add 1 to string[1]
 if(date1[2]/4 = int)
+today i learned basic git working
