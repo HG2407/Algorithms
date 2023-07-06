@@ -8,7 +8,7 @@ function onLoad(){
 function swap(arr, i, j){
     let c = arr[i];
     arr[i] = arr[j];
-    arr[j] = arr[i];
+    arr[j] = c;
 }
 
 function sorter(arr){
