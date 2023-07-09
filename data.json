@@ -2,5 +2,6 @@
     "name" : "Harshit Goswami",
     "age" : 16,
     "email" : "harshitgoswami@example.com",
-    "marks" : [91, 91, 92, 93, 94]
+    "marks" : [91, 91, 92, 93, 94],
+    "timeouts": [3, 2, 4, 5, 1]
 }

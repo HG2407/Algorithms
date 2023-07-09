@@ -1,15 +1,50 @@
 window.addEventListener('load', onLoad);
 
-function onLoad(){
-    for(let i=0; i<array.length; i++){
-        array[i];
-    }
-    objectPrinter(person);
-    console.log(maxMarksFinder(person));
-    fetchJson("data.json", function(data) {
-        console.log(data.name, data.age);
+// if we want to await a function then that function should always return a promise
+//the sole purpose of this function is to pass the given amount of time but since we had to use it with await(for which we need to return promises) we have made it into a new function
+function asyncSetTimeOut(time) {
+    return new Promise(function(resolve, reject) {
+        setTimeout(resolve, time*1000);
     });
+}
 
+function onLoad(){
+
+    init();
+    console.log("after init");
+
+}
+
+async function init() {
+    console.log('init started');
+    let data;
+
+    try{
+        data =  await fetchJson('data.json');
+        console.log(data.name, data.age);
+    } catch(e) {
+        console.log(e);
+    }
+    if(!data) {
+        return;
+    }
+    for(let i=0; i<data.timeouts.length; i++){
+        await asyncSetTimeOut(data.timeouts[i]);
+        console.log(data.timeouts[i]);
+        // setTimeout(function() {
+        //     console.log(data.timeouts[i])
+        // }, data.timeouts[i]);
+    }
+}
+
+function seqTimeouts( arr, i ) {
+    if(i < arr.length) {
+        setTimeout(()=> {
+            console.log(arr[i]);
+            i++;
+            seqTimeouts(arr, i);
+        }, arr[i]*1000);
+    }
 }
 
 
@@ -19,21 +54,6 @@ let person = {
     email : 'harshitgoswami@example.com',
     marks : [91, 91, 92, 93, 94]
 }
-
-// console.log(person.name);
-// console.log(person.age);
-// console.log(person.email);
-
-// function objectPrinter(obj){
-//     let keys = Object.keys(obj);
-//     let i=0;
-//     while(i<keys.length){
-//         let key = keys[i];
-//         let value = obj[key];
-//         console.log(key + ' : ' + value);
-//         i++;
-//     }
-// }
 
 function maxMarksFinder(obj){
     let i = 0;
@@ -51,32 +71,25 @@ function maxMarksFinder(obj){
     return maxMarksIndex+1;
 }
 
-let book1 = {
-    title : 'book1',
-    author : 'authorOfBook1',
-    year : 'yearOfPublication'
-}
-
-let book2 = {
-    title : 'book2',
-    author : 'authorOfBook2',
-    year : 'yearOfPublication'
-}
-
 function objectPrinter(obj){
-    let keys =  Object.keys(obj);
-    let i = 0;
-
-    while(i<keys.length){
-        let key = keys[i];
-        let value = obj[key];
-        console.log(key + ' : ' + value);
-        i++;
+    try {
+        let keys =  Object.keys(obj);
+        let i = 0;
+    
+        while(i<keys.length){
+            let key = keys[i];
+            let value = obj[key];
+            console.log(key + ' : ' + value);
+            i++;
+        }
+    } catch(e) {
+        console.log(e);
     }
+    
 }
 
 
-let array = [objectPrinter(book1), objectPrinter(book2)];
+// let array = [objectPrinter(book1), objectPrinter(book2)];
 
 
 // fetch('data.json')
@@ -90,21 +103,22 @@ let array = [objectPrinter(book1), objectPrinter(book2)];
 //   });
 
 
-function fetchJson(fileUrl, callback) {
+function fetchJson(fileUrl) {
 
-    const xhr = new XMLHttpRequest();
-    xhr.open('GET', fileUrl, true);
-    xhr.onreadystatechange = function() {
-      if (xhr.readyState === 4 && xhr.status === 200) {
-        const data = JSON.parse(xhr.responseText);
-        // Process the data here
-        console.log(data);
-        callback(data);
-      } else if (xhr.readyState === 4) {
-        console.error('Error:', xhr.status);
-      }
-    };
-    xhr.send();
+    return new Promise((resolve, reject) => {
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', fileUrl, true);
+        xhr.onreadystatechange = function() {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+            const data = JSON.parse(xhr.responseText);
+            // Process the data here
+            resolve(data);
+          } else if (xhr.readyState === 4) {
+            console.error('Error:', xhr.status);
+            reject('error');
+          }
+        };
+        xhr.send();
+    })
 
 }
-
